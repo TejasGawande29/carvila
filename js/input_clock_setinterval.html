@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+    <style>
+        #tm {
+            margin: 12px 33px;
+            padding: 12px 20px;
+            font-size: 30px;
+            border-radius: 30%;
+            text-align: center;
+            border: 3px solid;
+            
+        }
+
+        button {
+
+            margin: 25px 203px;
+            padding: 12px 12px;
+            font-size: 14px;
+            background-color: #f5dee1;
+            border-radius: 7%;
+        }
+        button:hover{
+            background-color: rgb(252, 248, 247);
+            border: none;
+}
+    </style>
+    <script>
+
+
+        var i = 0;
+        var clr = ["red", "green", "blue", "violet", "aqua"]
+
+        function startclock() {
+            setInterval(function () {
+                var d = new Date();
+                dh = d.getHours();
+                dm = d.getMinutes();
+                ds = d.getSeconds();
+                tm.value = `${dh}:${dm}:${ds}`
+            }, 1000)
+
+            setInterval(function () {
+                tm.style.backgroundColor = clr[i];
+                tm.style.color = "white";
+                i++;
+            }, 5000)
+        }
+    </script>
+</head>
+
+<body style="position: relative; top:100px; left:33%">
+    <input type="text" id="tm" value="">
+    <div>
+        <button onclick="startclock();">Start Clock</button>
+    </div>
+</body>
+
+</html>

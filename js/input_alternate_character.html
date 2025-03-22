@@ -1,0 +1,27 @@
+|<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alternate Character</title>
+    <script>
+        function op(){
+            var tt=esc.value;
+            tt=parseInt(tt);
+            var str1=txt.value;
+            
+            
+            for(i=0; i<str1.length; i++){
+                console.log(str1[i]);
+                i=i+(tt);
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="number" id="esc" value="" placeholder="How Much digit do you want to Escape">
+    <input type="text" id="txt" value="" placeholder="Enter Name">
+    <button onclick="op();">Ok</button>
+    
+</body>
+</html>

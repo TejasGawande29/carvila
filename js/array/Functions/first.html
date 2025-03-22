@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>functions in js</title>
+    <script>
+
+        /*
+              let add=(n1,n2)=>{
+                        console.log(n1+n2)
+              }   
+            
+              add(25,5)
+        */
+
+        
+        n1 = 12;
+        n2 = 2;
+        num1 = 12;     //Both values pass from actual parameter and formal parameter is independent, it only focus on values not on variable.
+        num2 = 8;      // This is Allowed.
+
+
+
+        function add(num1, num2) {   //Formal parameter/argument.
+            console.log("Addition:" + (num1 + num2));
+        }
+        add(num1, num2);//actual parameter/argument.
+        add(20, 30);
+
+
+
+
+        function multiply(n1, n2) {
+            console.log("Multiplication is:" + (n1 * n2));
+        }
+        multiply(n1, n2);
+
+
+        function division(n1, n2) {
+            console.log("Division is:" + (n1 / n2));
+        }
+        division(n1, n2);
+
+
+
+        function substraction(n1, n2) {
+            console.log("Substraction is:" + (n1 - n2));
+        }
+        substraction(n1, n2);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

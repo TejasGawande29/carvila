@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS</title>
+    <script>
+        /*It will Overwrite num = 80 , num = 50 and give output 50.*/
+        /*It will give Undefined value. for undeclared variable.*/
+        var num1 = 50;
+        var num2 = 80;
+        var num3 = num1 + num2;
+        console.log(num3);
+
+
+        var dx1 = 50 + 1;   /*It will always shown in blue color in console*/
+        var dx2 = "50" + 1;  /*It will always shown in black color in console*/
+        /*var dx2 ="50" + 1; this will undergo concadination and give output 501*/
+        console.log(dx1);
+        console.log(dx2);
+
+        var dx3 = "50";
+        var dx4 = 50;
+        var dx5 = 1;
+        var sum = dx3 + dx4 + dx5;
+        console.log(sum)   /*It will give output as 50501. because of Concadination. and give string.*/
+
+
+        var dx6 = "5";
+        var dx7 = 5;
+        console.log(dx6 / dx7); /*It will peroform typecasting internally and give output 1. i.e:-5/5=1.*/
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

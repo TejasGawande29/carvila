@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change image</title>
+    <script>
+        var i = 0;
+        var images = ["br1.png", "blue.jpg", "black.jpg", "br3.png", "ext.webp"];
+        function bgcn() {
+            setInterval(function () {
+                if (i == images.length) {
+                }
+                else {
+                    b1.src = "/img/" + images[i];
+                    i++;
+                }
+            }, 1000)
+        }
+        function bgcp() {
+            setInterval(function () {
+                if (i == 0) {
+                    b1.src = "/img/bg.jpg";          
+                }
+                else {
+                    i = i - 1;
+                    b1.src = "/img/" + images[i];
+                }
+            }, 1000)
+        }
+        // var i=0;
+        // function start(){
+        //     setInterval(function(){
+        //         i++;
+        //         console.log(i);
+        //     },1000)
+        // }
+
+    </script>
+</head>
+
+<body>
+    <img src="/img/bg.jpg" alt="" id="b1" width="300px" height="300px">
+    <button onclick="bgcn();">Next Image</button>
+    <button onclick="bgcp();">Previous Image</button>
+
+
+    <!-- <button onclick="start();">Click</button> -->
+</body>
+
+</html>

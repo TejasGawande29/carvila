@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount Calculator</title>
+    <script>
+        var total = 12550;
+
+        if (total >= 5000) {
+
+            var disc = (total * 20) / 100;
+            console.log("You got a discount of:" + disc);
+            console.log("After Discount Your Bill Amount is:" + (total - disc));
+
+        }
+        else if (total >= 3000 && total < 5000) {
+
+            var disc = (total * 15) / 100;
+            console.log("You got a discount of:" + disc);
+            console.log("After Discount Your Bill Amount is:" + (total - disc));
+        }
+        else if (total >= 1000 && total <= 2999) {
+
+            var disc = (total * 10) / 100;
+            console.log("You got a discount of:" + disc);
+            console.log("After Discount Your Bill Amount is:" + (total - disc));
+        }
+        else if (total < 1000) {
+
+            console.log("You are not eligible for Discount. So your final Bill Amount is:" + total);
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

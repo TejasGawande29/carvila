@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Json my</title>
+    <style>
+        #bid {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .nm {
+            width: 40vw;
+            height: 30vh;
+            margin: 2%;
+            pad: 2%;
+        }
+    </style>
+</head>
+<body id="bid">
+    <!-- <img src="" alt="" id="jimage"> -->
+</body>
+<script>
+    var carInfo = `{
+        "image":"img/car1.webp",
+        "make":"Tata",
+        "model":"2018 Punch Eco sport RXL MT",
+        "desc":"Best Budget and safety Ratings.",
+        "price":850000,
+        "kms":40882,
+        "fuelType":"Diesel", 
+        "owner":"Second",
+        "emi":12756,
+        "discountedPrice":650000,
+        "otherCharges":551,
+        "smallImage":["/img/ext.webp","/img/int.webp","/img/imp.webp","/img/fea.webp"]
+    }`;
+    var jobj = JSON.parse(carInfo);
+    console.log(jobj);
+    console.log(jobj.smallImage[0]);
+    // jimage.src=jobj.smallImage[2]
+
+    for (var i = 0; i < jobj.smallImage.length; i++) {
+        var newimg = document.createElement("img");
+        newimg.classList.add("nm");
+        newimg.src = jobj.smallImage[i];
+        bid.appendChild(newimg);
+    }
+</script>
+</html>

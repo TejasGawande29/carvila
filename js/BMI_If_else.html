@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Body Index</title>
+    <script>
+        let Weight= 60;
+        let height= 1.6;
+        let bmi=Weight/(height*height);
+        console.log(bmi);
+
+        if(bmi>0 && bmi<=18.4){
+            console.log("underweight!");
+        }
+        else if(bmi>18.5 && bmi<=24.9){
+            console.log("Healthy Weight!");
+        }
+        else if(bmi>25.0 && bmi<=29.9){
+            console.log("Overweight!");
+        }
+        else if(bmi>30.0){
+            console.log("Obesity");     
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

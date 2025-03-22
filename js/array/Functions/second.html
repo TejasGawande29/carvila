@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>second function</title>
+    <Script>
+        /*    function sum(a, b, c) {
+                //console.log(" Addition of " + a + " and " + b  + " and " + c + " is "+ (a+b+c));
+    /******ES-6*****console.log(`Addition of ${a} and ${b} and ${c} is ${a + b + c}`);
+            }
+            sum(20, 80, 40);
+    */
+        /*
+                var money=1000;
+        
+                function grocery(a,money){
+                    console.log("You spend " + a + ". Your Reamaning balance is:-"+ (money-a));
+                }
+                grocery(200,money);
+        
+        
+                function grocery(b,money){
+                    console.log("You spend " + b + ". Your Reamaning balance is:-"+ (money-b));
+                }
+                grocery(c,money);
+                function grocery(b,money){
+                    console.log("You spend " + b + ". Your Reamaning balance is:-"+ (money-b));
+                }
+                grocery(c,money);
+        */
+
+
+        var money = 1000;
+
+        function grocery(money) {
+            var productprice = 100;
+
+            if (money > productprice) {
+                var remaining = (money - productprice);
+                console.log("Remaining balance is: " + remaining);
+                return remaining;
+            }
+            else {
+                console.log("Insuficient Balance!");
+                return money;
+            }
+
+        }
+
+        var remainingbalace = grocery(money);
+
+        function medical(remainingbalace) {
+            var medicineprice = 500;
+
+            if (remainingbalace > medicineprice) {
+                var remaining = (remainingbalace - medicineprice);
+                console.log("Remaining balance is: " + remaining);
+                return remaining;
+            }
+            else {
+                console.log("Insuficient Balance!");
+                return remainingbalace;
+            }
+
+
+        }
+        var remainingbalace = medical(remainingbalace);
+
+
+        function electronics(remainingbalace) {
+            var electronicsprice = 4090;
+
+            if (remainingbalace > electronicsprice) {
+                var remaining = remainingbalace - electronicsprice;
+                console.log("Remaining balance is: " + remaining);
+            }
+            else {
+                console.log("Insuficient Balance!");
+                return remainingbalace;
+            }
+
+        }
+        var remainingbalace = electronics(remainingbalace);
+    </Script>
+</head>
+
+<body>
+
+</body>
+
+</html>

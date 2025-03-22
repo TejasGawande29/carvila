@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>color change</title>
+    <script>
+
+        var v=0;
+       
+        function changepro(){
+            
+        phead.style.color=useripc.value;
+        phead.style.margin=useripm.value+"px";
+        phead.style.margin=useripp.value+"px";
+        
+        }
+    </script>
+</head>
+<body>
+    <h3 id="phead">This is an Example.</h3>
+    <input type="text" id="useripc" value="" placeholder="Enter Color">
+    <input type="number" id="useripm" value="" placeholder="Enter Margin ">
+    <input type="number" id="useripp" value="" placeholder="Enter Padding size without space">
+    
+    <button onclick="changepro();">Change Color Now</button>
+</body>
+</html>

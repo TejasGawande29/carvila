@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taking Input</title>
+    <style>
+        .parent{
+            display: flex;
+            position: relative;
+            top: 35px;
+            left: 416px;
+        }
+        .container{
+            display: grid;
+            grid-template-rows: ;
+            grid-template-columns: ;
+            border: 2px solid black;
+            border-radius: 6px;
+            height: 40vh;
+            width: 40vw;
+            
+        }
+        .container input{
+            border: 2px solid grey;
+            border-radius: 6px;
+            margin: 26px;
+            padding: 16px;
+        }
+    </style>
+    <script>
+        function add() {
+            var nump = num1.value;
+            nump = parseInt(nump);
+            var nums = num2.value;
+            nums = parseInt(nums)
+
+            alert("Addition is: " + (nump + nums));
+        }
+        function sub() {
+            var nump = num1.value;
+            nump = parseInt(nump);
+            var nums = num2.value;
+            nums = parseInt(nums)
+
+            alert("Substraction is: " + (nump - nums));
+        }
+        function mul() {
+            var nump = num1.value;
+            nump = parseInt(nump);
+            var nums = num2.value;
+            nums = parseInt(nums)
+
+            alert("Multiplicatiion is: " + (nump * nums));
+        }
+        function div() {
+            var n1 = num1.value;
+            n1 = parseInt(n1);
+            var n2 = num2.value;
+            n2 = parseInt(n2)
+            alert("Division is: "+(n1/n2));
+
+        }
+    </script>
+</head>
+
+<body>
+   <div class="parent">
+    <div class="container">
+        <input type="number" id="num1" value="" placeholder="Enter first Number">
+        <input type="number" id="num2" value="" placeholder="Enter second Number">
+        <button onclick="add();">Addtion</button>
+        <button onclick="sub();">Substraction</button>
+        <button onclick="mul();">multiplication</button>
+        <button onclick="div();">division</button>
+    </div>
+   </div>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Element in JavaScript</title>
+    <script>
+        function ex() {
+            for (i = 1; i <= 10; i++) {
+                var c1 = document.createElement("h1");
+                c1.innerHTML = `This is Heading ${i}`;
+                var c2 = document.createElement("p");
+                c2.appendChild(c1);
+                var c3 = document.createElement("div");
+                c3.appendChild(c2);
+                body1.appendChild(c3);
+            }
+        }
+    </script>
+</head>
+
+<body id="body1">
+    <button onclick="ex();">click here</button>
+</body>
+
+</html>

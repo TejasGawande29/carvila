@@ -1,0 +1,4 @@
+h1{
+    background-color: aquamarine;   /*it is used to group different files. it is use to theme the same css.Same code will apply to different files in one click*/
+    color: black;
+}

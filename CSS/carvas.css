@@ -1,0 +1,627 @@
+body {
+    background-color: #f5f5f5;
+}
+
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#container {
+    display: flex;
+    background-color: #6707c0;
+}
+
+#parent {
+    background-image: url(img/carr.jpg);
+    background-repeat: no-repeat;
+    height: 747px;
+}
+
+.element {
+    padding: 2% 20px;
+    /* top-bottom ; left-right */
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: bold;
+    /* border: 2px solid black; */
+}
+
+a :hover {
+    background-color: rgb(138, 89, 25);
+}
+
+#box1 {
+    width: 20%;
+    padding: 2% 25px;
+    font-size: 25px;
+}
+
+#box7 {
+    width: 20%;
+    padding: 25px;
+    margin: 5px 27px;
+}
+
+#heading {
+    display: flex;
+    margin-left: 10%;
+    padding-left: 23%;
+    color: aliceblue;
+    font-size: 25px;
+}
+
+#contain {
+    color: rgb(255, 255, 255);
+    padding: 17px 174px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+#contactus {
+    margin-top: 0%;
+    font-weight: 500;
+    font-size: 25px;
+    background-color: #a0a0fd;
+    border-radius: 10%;
+    margin-left: 44%;
+    margin-top: 6%;
+    border: 2px solid;
+    width: 12%;
+}
+
+.containerForm {
+    
+    width: 57%;
+    height: 56%;
+    border: 2px solid #fffefe;
+    border-radius: 3%;
+    display: flex;
+    justify-content: center;
+    /*Horizontal*/
+    align-items: center;
+    margin-left: 23%;
+    margin-top: -29%;
+    background-color: #f5f5f5;
+    box-shadow: 13px 36px 117px -10px #d3d3d3;
+    /*hvbsc :- Horizontal vertical blur spread color*/
+}
+
+.formElementName {
+    color: rgb(0, 0, 0);
+    /* margin: -4px 2px; */
+    margin-top: 30px;
+    padding: 0px 23px;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+#search {
+    color: whitesmoke;
+    padding: 12% 41%;
+    background-color: blue;
+    margin-top: 156%;
+    margin-left: 70%;
+    width: 188%;
+    font-weight: bold;
+    font-size: large;
+}
+
+.select {
+    background-color: rgb(249 249 249);
+    border: 2px solid rgb(249 249 249);
+    border-radius: 6%;
+    margin: 23px 27px;
+    padding: 4% 8%;
+}
+
+.informationcontainer {
+    display: flex;
+    /* border: 2px solid red; */
+    justify-content: center;
+    align-items: center;
+    margin-top: 90px;
+}
+
+.product {
+    display: inline-block;
+    border: 2px solid rgb(65, 69, 59);
+    width: 31%;
+    margin: 0px 13px;
+    border-radius: 10%;
+
+}
+
+.productimage {
+    /* border: 2px solid orange; */
+    margin: 32px 188px;
+    width: 87px;
+    height: 66px;
+}
+
+.productheading {
+    /* border: 2px solid violet; */
+    padding: 10px 110px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.productpara {
+    /* border: 2px solid tomato; */
+    padding: 19px 78px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+a:hover {
+    color: rgb(117, 201, 83);
+}
+
+#contactus:hover {
+    background-color: whitesmoke;
+}
+
+#search a:hover {
+
+    color: black;
+}
+
+#search:hover {
+    background-color: antiquewhite;
+}
+
+.containernewest {
+    /* border: 2px solid red; */
+    margin-top: 108px;
+}
+
+#chekout {
+    /* border: 2px solid green; */
+    display: inline-block;
+    width: 30%;
+    margin-left: 36%;
+    text-align: center;
+    margin-top: 2px;
+    font-size: 20px;
+
+
+}
+
+#newestcars {
+    /* border: 2px solid yellow; */
+    display: inline-block;
+    width: 30%;
+    margin-left: 36%;
+    text-align: center;
+    margin-top: 8px;
+    font-weight: bolder;
+    font-size: 36px;
+    color: rgb(189, 60, 60);
+
+}
+
+.containercardescription {
+    /* border: 2px solid rgb(0, 0, 0); */
+    margin: 20px;
+    display: flex;
+}
+
+#yellowcar {
+    /* border: 2px solid rgb(207, 229, 68); */
+    width: 339%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.yellowcardescription {
+    /* border: 2px solid rgb(135, 33, 33); */
+    display: flex;
+    flex-direction: column;
+
+}
+
+#chevroletcarheading {
+    /* border: 2px solid green; */
+    width: 86%;
+    text-align: left;
+    margin-top: 8%;
+    font-weight: bolder;
+    font-size: 30px;
+
+}
+
+#chevroeltcardescription {
+    /* border: 2px solid tomato; */
+    /* background-color: blanchedalmond; */
+    display: inline-block;
+    height: 30%;
+    margin-top: 42px;
+    text-align: left;
+}
+
+#chevroletcarbutton {
+    display: inline-block;
+    border: 2px solid blue;
+    border-radius: 2px;
+    margin-top: 28px;
+    margin-bottom: 21px;
+    width: 30%;
+    height: 57px;
+    font-size: 20px;
+    background-color: blue;
+    color: white;
+    box-shadow: 2px 2px 2px 2px grey;
+}
+
+#image {
+    box-shadow: 13px 26px 18px -14px #c6bfbf;
+    border-radius: 40px;
+    /* border: 4px solid greenyellow; */
+    width: 77%;
+    height: 80%
+}
+
+#chevroletcarbutton:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.person {
+    display: flex;
+    background-color: aliceblue;
+
+}
+
+.personal {
+    border: 2px solid black;
+    box-shadow: 8px 14px 18px 2px #cac6c6;
+    border: 2px solid black;
+    margin: 75px 77px;
+    text-align: center;
+    width: 396px;
+    box-shadow: 8px 14px 18px 2px #cac6c6;
+    padding: 40px 46px;
+    border-radius: 12px;
+}
+
+.personal:hover {
+    background-color: rgb(59, 188, 231);
+
+}
+
+.personal p {
+    font-size: 16px;
+    color: #5e6778;
+}
+
+.personal h4 {
+    font-size: 16px;
+    color: #5e6778;
+}
+
+.personal h5 {
+    font-size: 16px;
+    color: #5e6778;
+}
+
+.brand {
+    display: flex;
+    justify-content: center;
+}
+
+.brandlogo img {
+    padding: 0px 50px;
+}
+
+.brandlogo {
+    margin-top: 60px;
+}
+
+.footy {
+    /* border: 2px solid black; */
+    display: flex;
+    margin-top: 100px;
+    background: #2a2d54;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-bottom: -8px;
+}
+
+.inf {
+    /* border: 2px solid rgb(154, 16, 16); */
+    width: 20vw;
+    margin: 21px 60px;
+    padding: 44px 42px;
+
+}
+
+li {
+    list-style: none;
+    margin-top: 13px;
+
+}
+
+.inf h5 {
+    color: white;
+    font-size: large;
+
+
+}
+
+.inf h4 {
+    color: white;
+    font-size: large;
+}
+
+.inf p {
+    color: #eeeff6;
+}
+
+.inf ul li {
+    font-size: 14px;
+    color: #cfd0e3;
+    font-weight: 300;
+}
+
+.copyright {
+    position: relative;
+    bottom: 2px;
+    left: 0px;
+    width: 1516px;
+    border: 2px solid #2a2d54;
+    margin-top: 10px;
+    margin-left: -8px;
+    margin-bottom: -20px;
+    background-color: #2a2d54;
+    /* border: 1px solid #cfd0e3; */
+}
+
+.social {
+    position: absolute;
+    right: 58px;
+    bottom: 11px;
+
+}
+
+.conntained p {
+
+    padding-left: 67px;
+    color: #a8a9bf;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.social a {
+    margin: 0px 6px;
+}
+
+.inf input {
+    background-color: rgb(222, 201, 242);
+    border-radius: 10px;
+}
+
+#modelcontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 50vw;
+    width: 95vw;
+    padding: 2px;
+    margin: auto;
+    /* background-color: #eefeff; */
+    box-shadow: 35px 3px 53px 49px #eefeff;
+
+}
+
+.item {
+    border: 3px solid #5c5c5c;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 24vw;
+    margin: 12px 52px;
+    box-shadow: 10px 16px 20px 1px #e8bdbd;
+    border-radius: 10%;
+}
+
+.item:hover {
+    background-color: #dcdcdc;
+}
+
+.item img {
+
+    margin: 3px 12px;
+    align-items: center;
+    width: 340px;
+    height: 177px;
+}
+
+.item h3 {
+    font-weight: bolder;
+    margin-left: 30px;
+}
+
+.item h4 {
+    font-weight: bolder;
+    margin-left: 30px;
+}
+
+span {
+    padding: 0px 5px;
+    font-size: 15px;
+    color: #8c92a0;
+    margin-left: 30px;
+
+}
+
+.item p {
+    text-align: justify;
+    padding: -2px 13px;
+    margin-left: 30px;
+}
+
+.container-fluid {
+    border: 2px solid black;
+    background-color: #2a2d54;
+    color: white;
+    font-family: sans-serif;
+    margin-top: 90px;
+}
+
+.col {
+    padding-left: 30px;
+    /* border: 2px solid red; */
+}
+
+.col h3 {
+    color: #fff;
+    font-weight: 700;
+    margin-top: 41px;
+}
+
+.col p {
+    margin-top: 50px;
+    font-size: 17px;
+    color: #eeeff6;
+    max-width: 300px;
+    text-align: justify;
+}
+
+.col ul {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.col ul li {
+    font-size: 17px;
+    color: #cfd0e3;
+    font-weight: 300;
+}
+
+.col input {
+    margin-top: 5%;
+    font-size: 15px;
+    border: 2px solid #250f39;
+    color: #666c81;
+    font-weight: 300;
+    border-radius: 10%;
+    background-color: #250f39;
+    box-shadow: -1px 1px 16px 0px black;
+
+}
+
+.row hr {
+    margin-top: 60px;
+    width: 94vw;
+    margin-left: 2%;
+    border: 1px solid white;
+}
+
+.col-9 p {
+    margin-left: 2%;
+}
+
+.col-3 img {
+
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-left: 12px;
+}
+
+#cin {
+    background-color: #e5f3ff;
+    width: 80vw;
+    margin-top: 87px;
+    margin-bottom: 87px;
+    border-radius: 2px;
+    box-shadow: 5px 6px 67px 37px #e5f3ff;
+    border: 2px solid #e5f3ff !important;
+}
+
+#row1 {
+    background-color: #e5f3ff;
+    margin-top: 14px;
+}
+
+#row1 .col-2 h3 {
+    /* border: 2px solid red; */
+    display: inline-block;
+    margin-right: -42px !important;
+    color: black;
+    font-weight: bolder;
+
+}
+
+#row1 .col-10 hr {
+    border: 2px solid rgb(118, 202, 230);
+    display: inline-block;
+    width: 64vw;
+    margin-top: 21px;
+}
+
+#row2 {
+    background-color: #e5f3ff;
+}
+
+#row2 .col-2 button {
+    border: 2px solid rgb(89, 162, 204);
+    margin-top: 30px;
+    margin-right: 10px;
+    width: 192px;
+    border-radius: 64px;
+    padding: 8px;
+
+}
+
+#row2 .col-4 button {
+    border: 2px solid yellow;
+}
+
+#row3 {
+    background-color: #e5f3ff;
+}
+
+#row3 .col-2 img {
+    border: 2px solid rgb(78, 78, 78);
+    margin-top: 30px;
+    margin-left: 6px;
+    padding: 10px;
+    width: 173px;
+    height: 108px;
+    border-radius: 20px
+}
+
+#row3 .col-6 img {
+    border: 2px solid blueviolet;
+}
+
+#row3 .col-2 h5 {
+    margin: 17px 3px;
+    color: #d47171;
+    padding: 2px 2px;
+    text-align: center;
+    border: 2px solid brown;
+    background-color: azure;
+}
+
+.flterRange {
+    color: #cc9292;
+    margin-top: 30px;
+    margin-bottom: 12px;
+    padding: 2px 14px;
+    border: 1px solid grey;
+}
+
+.jsh_5 {
+    border: 2px solid grey;
+    color: red;
+}

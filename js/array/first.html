@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays in js</title>
+    <script>
+        /*
+            You can also create an array, and then provide the elements:
+            const cars = [];
+            cars[0]= "Saab";
+            cars[1]= "Volvo";
+            cars[2]= "BMW";
+        */
+        /*  
+            In java-script Array we can store anything in single Array,
+        */
+        /*
+                var items=["Tv","Radio","Freeze","Mobiles","laptops",12,12.22,true];
+                for(var i=0; i<items.length; i++){
+                    console.log(items[i]);
+                }
+        */
+        var s1 = ["Tejas", 22, "Amravati"]
+        var s2 = ["Krishna", 19, "Morshi"]
+        var s3 = ["Ritika", 24, "Vilas Nagar"]
+        var students = [s1, s2, s3];
+        //console.log(students[0]);  /*"Tejas"22"Amravati"*/
+        // console.log(students[0][2]); /*Amravati*/
+        /*       console.log(students[0][2]);
+                 console.log(students[1][2]);
+                 console.log(students[2][2]); /*Sort-cut for this is below for loop
+        */
+        /*    
+        for (var i = 0; i < 3; i++) {
+            //console.log(students[i][2]); /*Amravati , Morshi, Vilas Nagar
+            for(j=0; j<3; j++){
+                console.log(students[i][j]);
+            }
+        }
+        */
+        /*
+        for (var i = 0; i < 3; i++){
+            //console.log(students[i][2]); /*Amravati , Morshi, Vilas Nagar
+           var deatail=" ";
+           for(j=0; j<3; j++){
+            deatail=deatail + students[i][j] + " ";
+           }
+           console.log(deatail);
+        }
+        */
+        var search="Jerry";
+        var fruits=["Gauva","Mango","Apple","Kiwi","Jerry"];
+        var position=-1;
+        var exist=false;
+        for(var i=0; i<fruits.length; i++){
+            if(fruits[i]==search){
+                position=i;
+                exist=true;
+            }
+        }
+        if(exist){         //we can also use exist= element_exits. but here we have to compare
+            console.log(search+" exists at " + position);
+        }
+        else{
+            console.log(search + "does not exists");
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

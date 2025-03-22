@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color</title>
+    <script>
+        function bg() {
+            setInterval(function () {
+                var nm1 = Math.floor(Math.random() * 255);
+                var nm2 = Math.floor(Math.random() * 255);
+                var nm3 = Math.floor(Math.random() * 255);
+                bga.style.backgroundColor = `rgb(${nm1}, ${nm2}, ${nm3})`;
+            }, 100)
+        }
+    </script>
+</head>
+
+<body id="bga">
+    <button onclick="bg();">Click to Change Background Color</button>
+</body>
+
+</html>

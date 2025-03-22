@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On change</title>
+    <style>
+
+    </style>
+    <script>
+        
+       function ex(){
+             var a=colors.value;
+             bg.style.backgroundColor=a;
+       }
+
+
+    </script>
+</head>
+<body id="bg">
+    <select name="" id="colors" onchange="ex();">
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="violet">Violet</option>
+        <option value="#e885a5">Hot Pink</option>
+    </select>
+   
+</body>
+</html>

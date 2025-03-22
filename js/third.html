@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**************BILL-CALULATOR*********/
+
+
+        /*Electricity Calculator
+            0–100 units: Rs. 5/unit
+            101–200 units: Rs. 7/unit
+            201–300 units: Rs. 10/unit
+            Above 300 units: Rs. 15/unit
+         */
+
+        //  var consume=450;
+        //  if(consume<=100)
+        //  {
+        //     var totalbill=consume*5;
+        //     console.log("Total "+totalbill);
+        //  }else if(consume<=200)
+        //  {
+        //     var b1=500;
+        //     var b2=(consume-100)*7;
+        //     var totalbill=b1+b2;
+        //     console.log("Total "+totalbill);
+        //  }else if(consume<=300)
+        //  {
+        //     var b1=500;
+        //     var b2=700;
+        //     var b3=(consume-200)*10;
+        //     var totalbill=b1+b2+b3;
+        //     console.log("Total "+totalbill);
+        //  }else{
+        //     var b1=500;
+        //     var b2=700;
+        //     var b3=1000;
+        //     var b4=(consume-300)*15;
+        //     var totalbill=b1+b2+b3+b4;
+        //     console.log("Total "+totalbill);
+        //  }
+
+
+
+
+
+        var consum=268;
+
+        if(consum<=100){
+            console.log(consum*5);
+        }
+        else if(consum<=200){
+            console.log(100*5 + (consum-100)*7);
+        }
+        else if(consum<=300){
+            console.log(100*5 + 100*7 + (consum-200)*10);
+        }
+        else if(consum>301){
+            console.log(100*5 + 100*7 + 100*10 + (consum-300)*15);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

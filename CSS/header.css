@@ -1,0 +1,12 @@
+#container {
+    display: flex;
+    background-color: #6707c0;
+}
+.element {
+    padding: 2% 20px;
+    /* top-bottom ; left-right */
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: bold;
+    /* border: 2px solid black; */
+}

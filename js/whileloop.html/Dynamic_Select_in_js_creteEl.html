@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Select Element</title>
+    <script>
+        function ex() {
+
+            var city = ["Select", "Amravati", "Akola", "Yawatmal", "Nashik", "Nagpur", "Mumbai"]
+            var sel = document.createElement("select");
+
+            for (i = 0; i < city.length; i++) {
+                var opt = document.createElement("option");
+                opt.innerHTML =city[i];
+                opt.value =city[i];
+                sel.appendChild(opt);
+            }
+            b1.appendChild(sel);
+        }
+    </script>
+</head>
+<body id="b1">
+    <button onclick="ex();">click to Show options</button>
+</body>
+</html>
