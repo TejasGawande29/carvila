@@ -164,7 +164,6 @@ function getCarInfo()
         "carIntro"=>$description
     );
     return json_encode($carInfo);
-
 }
 
 function getCarsInfo($FILTER)
