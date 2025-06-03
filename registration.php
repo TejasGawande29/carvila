@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
         body {
             background-color: #f2f2f2;
@@ -73,6 +74,60 @@
             border-radius: 10px;
         }
     </style>
+    <script>
+        function register() {
+      if (username.value != "" && password.value != "" && mobile.value!="" && age.value!="" && dob.value!="" && city.value!="" ) {
+        $.ajax({
+          url: "functions.php",
+          type: "POST",
+          data: {
+            "RESULT_TYPE": "REGISTRATION",
+            "USERNAME": username.value,
+            "PASSWORD": password.value,
+            "MOBILE": mobile.value,
+            "AGE": age.value,   
+            "DOB": dob.value,
+            "CITY": city.value,
+            "GENDER":$('input[name="gender"]:checked').val(),
+            "HOBBIES":getHobbies()
+            
+          },
+          success: function(res) {
+            console.log(res)
+            var jobj = JSON.parse(res)
+            if (jobj.result == 1) {
+              toastr.success("Registration Successful")
+            
+              setTimeout(() => {
+                window.location.replace("login.php");
+              }, 1000);
+ 
+            } else {
+              toastr.error("Registration Failed")
+            }
+
+
+          }
+        });
+
+      } else {
+        toastr.info("Enter Username and Password")
+      }
+    }
+    function getHobbies(){
+    var hobbies=""
+    if($('#coding:checked'))
+    hobbies=$('#coding:checked').val()+"|";
+
+    if($('#riding').is(":checked"))
+    hobbies=hobbies+$('#riding:checked').val()+"|";
+
+    if($('#swimming').is(":checked"))
+    hobbies=hobbies+$('#swimming:checked').val()
+
+  return hobbies
+  }
+    </script>
 </head>
 
 <body>
@@ -84,7 +139,7 @@
                 <img src="img/logo.jpg" alt="Logo" class="logo">
             </div>
 
-            <form action="functions.php" method="get">
+           
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input class="form-control" name="username" type="text" id="username" required placeholder="Enter your username">
@@ -99,10 +154,14 @@
                     <label for="age">Age</label>
                     <input class="form-control" name="age" type="number" id="age" placeholder="Enter your age">
                 </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile</label>
+                    <input class="form-control" name="mobile" type="number" id="mobile" placeholder="Enter your Mobile">
+                </div>
 
                 <div class="form-group">
                     <label>Gender</label>
-                    <div>
+                    <div id=gender>
                         <label for="male">
                             <input class="form-check-input" type="radio" id="male" name="gender" value="Male"> Male
                         </label>
@@ -137,7 +196,7 @@
 
                 <div class="form-group">
                     <label>Hobbies</label>
-                    <div>
+                    <div id="hobbies">
                         <label>
                             <input class="form-check-input" type="checkbox" name="hobbies[]" value="Coding" id="coding"> Coding
                         </label>
@@ -151,14 +210,17 @@
                     <input type="text" name="RESULT_TYPE" value="REGISTRATION" hidden>
                 </div>
 
-                <button type="submit" class="btn-register">Register Now</button>
+                <button type="submit" class="btn-register" onclick="register();">Register Now</button>
 
                 <div class="form-footer">
                     <a href="login.php">Already have an account? Login Now</a>
                 </div>
-            </form>
+           
         </div>
     </div>
 </body>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 </html>

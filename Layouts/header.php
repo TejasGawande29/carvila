@@ -1,16 +1,18 @@
 <link rel="stylesheet" href="CSS/bootstrap.min.css">
 <link rel="stylesheet" href="CSS/carvas.css">
+
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <div id="container">
 
   <div class="element" id="box1"> <a href="index.php"><img src="img/logocarvila.webp" alt="" width="100px" height="70px"></a></div>
-  <div class="element" id="box2"> <a href="">HOME</a></div>
-  <div class="element" id="box3"><a href="">SERVICE</a> </div>
-  <div class="element" id="box4"> <a href="">FEATURED CARDS</a></div>
-  <div class="element" id="box5"> <a href="">NEW CARS</a></div>
-  <div class="element" id="box6"> <a href="">BRANDS</a></div>
-  <div class="element" id="box7"> <a href="">CONTACT</a></div>
+  <div class="element" id="box2"> <a href="" style="text-decoration: none;">HOME</a></div>
+  <div class="element" id="box3"><a href="" style="text-decoration: none;">SERVICE</a> </div>
+  <div class="element" id="box4"> <a href="" style="text-decoration: none;">FEATURED CARDS</a></div>
+  <div class="element" id="box5"> <a href="" style="text-decoration: none;">NEW CARS</a></div>
+  <div class="element" id="box6"> <a href="" style="text-decoration: none;">BRANDS</a></div>
+  <div class="element" id="box7"> <a href="" style="text-decoration: none;">CONTACT</a></div>
 
   <?php
   session_start();
@@ -35,3 +37,4 @@
     window.location.replace("logout.php");
   }
 </script>
+<link rel="stylesheet" href="../dist/output.css">

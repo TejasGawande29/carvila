@@ -19,8 +19,12 @@
 
   <script src="js/jquery-3.7.1.min.js"></script>
   <script>
+
     $(document).ready(function() {
-      console.log("ready!");
+      var qs = window.location.search; //         it will give from ?year=2021 to 1_Lack
+      var params = new URLSearchParams(qs); //         This converts the query string into an object so you can easily get values like: it will give from year=2021 to 1_Lack
+     
+      console.log(params.get(params));
 
       $.ajax({
         url: "functions.php",
@@ -29,7 +33,7 @@
           "RESULT_TYPE": "GET_CAR_INFO"
         },
         success: function(res) {
-          console.log(res)
+          // console.log(res)
           var jobj = JSON.parse(res)
           showCarInfo(jobj);
         }
@@ -392,7 +396,10 @@
     var car = jobj.car
     carName.innerHTML = `${car.makeYear} ${car.make} ${car.model} ${car.fuelType} `
 
-    var jkeys = Object.keys(jobj.car);
+    var jkeys = object.keys(jobj.car);
+    (jkeys);
+    console.log
+    console.log("jkeys");
     for (var i = 0; i < jkeys.length; i++) {
       var ele = document.getElementById(jkeys[i]);
       if (ele != null) {
@@ -454,7 +461,6 @@
 
   }
 
-  //console.log(Object.keys(jobj.car))
 
 
   function formatToLakh(number) {

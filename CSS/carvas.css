@@ -96,7 +96,7 @@ a :hover {
     font-size: 23px;
 }
 
-#search {
+.Search {
     color: whitesmoke;
     padding: 12% 41%;
     background-color: blue;
@@ -409,14 +409,14 @@ li {
 #modelcontainer {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-    height: 50vw;
+    flex-wrap:wrap;
+    overflow-y: auto;
+    height: 85vh;
     width: 95vw;
     padding: 2px;
     margin: auto;
-    /* background-color: #eefeff; */
-    box-shadow: 35px 3px 53px 49px #eefeff;
+    background-color: white;
+    box-shadow: 35px 3px 53px 49px #bdedf0;
 
 }
 
@@ -441,6 +441,7 @@ li {
     align-items: center;
     width: 340px;
     height: 177px;
+    border-radius: 12px;
 }
 
 .item h3 {
@@ -625,3 +626,4 @@ span {
     border: 2px solid grey;
     color: red;
 }
+

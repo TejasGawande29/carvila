@@ -1,5 +1,5 @@
 <?php
-include_once("Layouts/header.php")
+include_once("Layouts/header.php");
 ?>
 
 <!DOCTYPE html>
@@ -26,13 +26,15 @@ include_once("Layouts/header.php")
             height: 100vh;
             width: 100vw;
             margin-left: 64px;
+            margin-bottom: 16.68%;
+
         }
 
         .filter {
             border: 2px solid black;
             border-radius: 25px;
             width: 25vw;
-            height: 97vh;
+            height: 135vh;
             padding: 15px;
             margin-right: 5px;
         }
@@ -41,7 +43,7 @@ include_once("Layouts/header.php")
             border: 2px solid black;
             border-radius: 25px;
             width: 100vw;
-            height: 97vh;
+            height: 135vh;
             padding: 5px;
             display: flex;
             flex-wrap: wrap;
@@ -67,6 +69,7 @@ include_once("Layouts/header.php")
         .car img {
             width: 205px;
             height: 174px;
+            margin-top: 12px;
         }
 
         .info {
@@ -116,7 +119,7 @@ include_once("Layouts/header.php")
 
         .info button {
             border-radius: 6px;
-            margin-left: 40px;
+            margin-left: 19px;
             padding: 4px;
         }
 
@@ -133,31 +136,25 @@ include_once("Layouts/header.php")
     </style>
     <script>
         $(document).ready(function() {
-           /* http://localhost/carvila/carlisting.php?year=2021&make=Audi&model=A3&carstyle=Sudan&condition=Better&price=Below_1_lack*/
-            console.log("ready!");
+            /* http://localhost/carvila/carlisting.php?year=2021&make=Audi&model=A3&carstyle=Sudan&condition=Better&price=Below_1_lack*/
+
             var qs = window.location.search; //         it will give from ?year=2021 to 1_Lack
-            var params = new URLSearchParams(qs);//         it will give from year=2021 to 1_Lack
+            var params = new URLSearchParams(qs); //         This converts the query string into an object so you can easily get values like: it will give from year=2021 to 1_Lack
             var fdata = {};
+            console.log(params.get("carid"));
+
 
             if (!params.has("filter")) {
-                
+
                 fdata = {
-                    "userid": "admin",
-                    "pass1": "admin",
-                    "RESULT_TYPE": "GET_CAR_INFO",
-                    "YEAR": params.get("year"),
-                    "MAKE": params.get("make"),
-                    "MODEL": params.get("model"),
-                    "STYLE": params.get("carstyle"),
-                    "CONDITION": params.get("condition"),
-                    "PRICE": params.get("price")
+
+                    "RESULT_TYPE": "GET_CARS_FROM_CARID",
+                    "CARID": params.get("carid")
                 }
             } else {
                 fdata = {
-                    "RESULT_TYPE": "GET_CARS_INFO",
-                    "CATEGORY": params.get("filter".split("-")[0]),
-                    "FILTER": params.get("filter").split("-")[1]
-
+                    "RESULT_TYPE": "GET_CARS_FROM_FILTER",
+                    "FILTER": params.get("filter")
                 }
             }
 
@@ -165,11 +162,15 @@ include_once("Layouts/header.php")
                 url: "functions.php",
                 type: "POST",
                 data: fdata,
+                /*{
+                                               "RESULT_TYPE": "GET_CARS_FROM_CARID",
+                                               "CARID": params.get("carid")
+                                               },*/
                 success: function(res) {
-                    console.log(res);
+                    console.log("filter res");
                     var jobj = JSON.parse(res);
+                    console.log(jobj);
                     resutlcar(jobj);
-                    
 
                 }
             });
@@ -180,7 +181,6 @@ include_once("Layouts/header.php")
 
 <body style="background-color:#fcf8f8">
 
-
     <div class="container">
         <div class="filter" id="jsfilter">
             <div><br>
@@ -190,13 +190,13 @@ include_once("Layouts/header.php")
             <div><br>
                 <span class="btn btn-light" style="margin: 4px;">₹100000</span>
                 <span class="btn btn-light" style="margin-left: 44px;" id="maxPrice">₹2000000</span>
-                <input type="range" id="priceRange" min="100000" max="2000000"onchange="rangeChange();">
+                <input type="range" id="priceRange" min="100000" max="10000000" onchange="applyFilter(this);">
             </div>
             <div> <br><span style="color: #7e8594;;">Suggestion</span><br>
-                <button class="btn btn-outline-secondary">Under 3 lack</button><button
-                    class="btn btn-outline-secondary">From 3 lack to 5 lack</button><button
-                    class="btn btn-outline-secondary">from 5 lack to 10 lack</button><button
-                    class="btn btn-outline-secondary">Above 10 lack</button>
+                <button  id="0-3" class="btn btn-outline-secondary" type="button" onclick="applyFilter(this)" id>Under 3 lack</button>
+                <button id="3-5"  class="btn btn-outline-secondary" type="button" onclick="applyFilter(this)">From 3 lack to 5 lack</button>
+                <button id="5-10"   class="btn btn-outline-secondary" type="button" onclick="applyFilter(this)">from 5 lack to 10 lack</button>
+                <button id="10-100"  class="btn btn-outline-secondary" type="button" onclick="applyFilter(this)">Above 10 lack</button>
             </div><br><br>
             <div>
                 <img src="img/brand.png" alt="" width="25px"><span style="font-size: 20px; font-weight: bold;">Make and
@@ -208,42 +208,66 @@ include_once("Layouts/header.php")
             </div>
         </div>
         <div class="result" id="resultjs">
-            
-
-
-
 
         </div>
     </div>
     <script>
+        var makes =[""];
+        var maxprice=10000000;
+        var pricerange="0-0";
+        function applyFilter(ele) {
+            console.log(ele.value);
+            
+            switch(ele.type){
+                case "click":
+                    
+                    if(makes.includes(this.id)){
+                        const index = makes.indexOf(this.id);
+                        makes.splice(index,1);
+                    }else{
+                        makes.push(this.id)
+                        
+                    }
+                break;  
 
-        function applyFilter(maxprice){
+                case "range":
+                    maxprice=ele.value;
+                    pricerange="0-0";
+                break;  
+                case "button":
+                     pricerange=ele.id;
+                     maxprice=0;
+                break;  
+                
+            }
+          
             $.ajax({
                 url: "functions.php",
                 type: "POST",
                 data: {
                     "RESULT_TYPE": "APPLY_FILTER",
-                    "MAXPRICE":maxprice
+                    "MAXPRICE": maxprice,
+                    "MAKES":makes,
+                    "PRICERANGE":pricerange
                 },
                 success: function(res) {
-                    console.log(res);
-                    var jobj=JSON.parse(res);
-                    resultjs.innerHTML="";
+
+                    var jobj = JSON.parse(res);
+                    console.log(jobj);
+                    console.log("applyfilter");
+                    resultjs.innerHTML = "";
 
                     resutlcar(jobj);
-                    
+
                 }
             });
         }
 
         priceRange.addEventListener("input", function() {
-            maxPrice.innerHTML = "₹"+priceRange.value;
-            
+            maxPrice.innerHTML = "₹" + priceRange.value;
+
         });
-        function rangeChange(){
-            console.log(priceRange.value);
-            applyFilter(priceRange.value);
-        }
+       
 
         createModelFilter();
 
@@ -256,20 +280,23 @@ include_once("Layouts/header.php")
                     "RESULT_TYPE": "GET_MODEL_FILTER"
                 },
                 success: function(res) {
-                    console.log(res);
+
                     var jobj = JSON.parse(res);
 
 
                     var modelsarr = jobj;
-
+                    console.log(modelsarr);
+                    console.log("modelsarr");
                     for (i = 0; i < modelsarr.length; i++) {
 
                         var inp = document.createElement("input");
                         inp.type = "checkbox";
+                        inp.id = `${modelsarr[i].make}`;
+                        inp.addEventListener("click",applyFilter)
                         jsch.appendChild(inp);
 
                         var sp = document.createElement("span");
-                        sp.innerHTML = `${modelsarr[i]} (${i})`
+                        sp.innerHTML = `${modelsarr[i].make} (${modelsarr[i].makecount})`
                         jsch.appendChild(sp);
 
                         var br1 = document.createElement("br");
@@ -285,10 +312,11 @@ include_once("Layouts/header.php")
         }
 
         function resutlcar(varrsarr) {
-             
-            console.log(varrsarr.car);
-            for (i = 0; i < varrsarr.length; i++) {
+
+            for (let i = 0; i < varrsarr.length; i++) {
                 var carfromobj = varrsarr[i];
+                // console.log(carfromobj);
+
 
                 var cari = document.createElement("div");
                 cari.classList.add("car");
@@ -296,29 +324,29 @@ include_once("Layouts/header.php")
                 cari.id = carfromobj.id
 
                 var img1 = document.createElement("img");
-                img1.src = carfromobj.image;
+                img1.src = "img/" + carfromobj.image;
                 cari.appendChild(img1);
 
                 var infodiv = document.createElement("div");
                 infodiv.classList.add("info");
                 cari.appendChild(infodiv);
                 var h5infodiv = document.createElement("h5");
-                h5infodiv.innerHTML = carfromobj.make;
+                h5infodiv.innerHTML = carfromobj.name+"-"+carfromobj.makeYear;
                 infodiv.appendChild(h5infodiv);
 
                 var ulinfodiv = document.createElement("ul");
                 infodiv.appendChild(ulinfodiv);
                 var li1ulinfodiv = document.createElement("li");
-                li1ulinfodiv.innerHTML = carfromobj.fuleType;
+                li1ulinfodiv.innerHTML = carfromobj.fuelType;
                 ulinfodiv.appendChild(li1ulinfodiv);
                 var li2ulinfodiv = document.createElement("li");
-                li2ulinfodiv.innerHTML = carfromobj.bodyMaterial;
+                li2ulinfodiv.innerHTML = carfromobj.owner;
                 ulinfodiv.appendChild(li2ulinfodiv);
                 var li3ulinfodiv = document.createElement("li");
-                li3ulinfodiv.innerHTML = carfromobj.distanceTravled + "KMS";
+                li3ulinfodiv.innerHTML = carfromobj.kms + "KMS";
                 ulinfodiv.appendChild(li3ulinfodiv);
                 var ainfodiv = document.createElement("a");
-                ainfodiv.innerHTML = `EMI ₹${carfromobj.emiPrice} /Month`;
+                ainfodiv.innerHTML = `EMI ₹${carfromobj.emi} /Month`;
                 ainfodiv.href = "#";
                 infodiv.appendChild(ainfodiv);
                 var br1infodiv = document.createElement("br");
@@ -327,18 +355,18 @@ include_once("Layouts/header.php")
                 stronginfodiv.innerHTML = `₹${carfromobj.discountedPrice}`;
                 infodiv.appendChild(stronginfodiv);
                 var strikeinfodiv = document.createElement("strike");
-                strikeinfodiv.innerHTML = `₹${carfromobj.originalPrice}`;
+                strikeinfodiv.innerHTML = `₹${carfromobj.price}`;
                 infodiv.appendChild(strikeinfodiv);
                 var br2infodiv = document.createElement("br");
                 infodiv.appendChild(br2infodiv);
                 var br3infodiv = document.createElement("br");
                 infodiv.appendChild(br3infodiv);
                 var buttoninfodiv = document.createElement("button");
-                buttoninfodiv.innerHTML = carfromobj.btnContaint;
+                buttoninfodiv.innerHTML = "Book Your Free Test Drive!";
                 infodiv.appendChild(buttoninfodiv);
 
                 resultjs.appendChild(cari);
-                console.log(cari);
+                // console.log(cari);
             }
         }
     </script>

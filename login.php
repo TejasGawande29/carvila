@@ -170,8 +170,9 @@
                     }
                 });
             } else {
-                toastr.info("Enter UserName and Password!")
+                toastr.info("Enter UserName and Password...!")
             }
+           
         }
     </script>
 </head>

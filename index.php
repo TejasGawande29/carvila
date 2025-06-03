@@ -3,27 +3,21 @@
     include_once("Layouts/header.php")
     ?>
 </div>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
-    <link rel="stylesheet" href="CSS/carvas.css">
+    <link rel="stylesheet" href="CSS/carvas.css">   
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function() {
             console.log("ready!");
-            /*  $.ajax({
-                  url: "test.html",
-                  cache: false,
-                  success: function(html) {
-                      $("#results").append(html);
-                  }
-              });*/
 
             $.ajax({
                 url: "functions.php",
@@ -34,7 +28,10 @@
                     "RESULT_TYPE": "GET_CARS"
                 },
                 success: function(res) {
-                    getCars(res);
+                    var jobj = JSON.parse(res);
+                    // console.log(jobj.cars);
+                    // console.log("Tejas");
+                    modelc(jobj.cars);
 
                 }
             });
@@ -42,21 +39,52 @@
         });
 
         function redirectToCarlisting2() {
-            window.location.href = "carlisting.php?filter=" + this.id
+            window.location.href = "carlisting.php?filter=" + this.id;
+
         }
 
-        function redirectToCarlisting() {
+        function redirectToCarlisting(ele) {
             if (year.value != 0 && make.value != 0 && model.value != 0 && carstyle.value != 0 && condition.value != 0 && price.value != 0) {
 
-                window.location.href = `carlisting.php?year=${year.value}&make=${make.value}&model=${model.value}&carstyle=${carstyle.value}&condition=${condition.value}&price=${price.value}`
+                window.location.href = `carlisting.php?carid=${ele.id}`;
             } else {
                 alert("Please Select all values!")
             }
         }
+
+        function yearsChange() {
+            $.ajax({
+                url: "functions.php",
+                type: "POST",
+                data: {
+                    "RESULT_TYPE": "SELECT_YEARS_CHANGE",
+                    "YEAR": year.value
+                },
+                success: function(res) {
+                    console.log(res);
+                    var jobj = JSON.parse(res);
+                    make.innerHTML = "";
+
+                    var defaultOption = document.createElement("option");
+                    defaultOption.innerHTML = "Select Make";
+                    defaultOption.value = "0";
+                    make.appendChild(defaultOption);
+
+                    for (var i = 0; i < jobj.length; i++) {
+                        var opt = document.createElement("option");
+                        opt.innerHTML = jobj[i];
+                        opt.value = jobj[i];
+                        make.appendChild(opt);
+                    }
+
+                }
+            });
+        }
     </script>
+    
 </head>
 
-<body id="b1">
+<body  id="b1">
     <?php
     include_once("Layouts/header.php")
     ?>
@@ -72,7 +100,7 @@
             sunt.
         </div>
         <div id="button">
-            <button id="contactus">Contact Us</button>
+            <button class="" id="contactus">Contact Us</button>
         </div>
 
     </div>
@@ -81,7 +109,7 @@
             <tr>
                 <td>
                     <div class="formElementName">Select Year</div>
-                    <Select class="select" id="year">
+                    <Select class="select" id="year" onchange="yearsChange();">
                         <option value="0">Select Year</option>
                     </Select>
                 </td>
@@ -93,24 +121,24 @@
                 </td>
                 <td>
                     <div class="formElementName">Select Model</div>
-                    <select name="" class="select" id="model">
+                    <select name="" class="select" id="model" onchange="modelchange();">
                         <option value="0">Select Model</option>
                     </select>
                 </td>
                 <td>
-                    <Button id="search" onclick="redirectToCarlisting();">Search</Button>
+                    <Button id="search" class="Search" onclick="redirectToCarlisting(this)">Search</Button>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div class="formElementName">Body Style</div>
-                    <select name="" class="select" id="carstyle">
+                    <select name="" class="select" id="carstyle" onchange="carstyleChange();">
                         <option value="0">Select Style</option>
                     </select>
                 </td>
                 <td>
                     <div class="formElementName">Car Condition</div>
-                    <select name="" class="select" id="condition">
+                    <select name="" class="select" id="condition" onchange="conditionChange();">
                         <option value="0">Select Condition</option>
                     </select>
                 </td>
@@ -150,24 +178,6 @@
         <div id="chekout">Checkout the latest Cars</div>
         <div id="newestcars">Newest CARS</div>
     </div>
-    <!-- <div class="containercardescription">
-        <span id="yellowcar"><img src="img/yellowcar.png" alt="" id="image"></span>
-        <span class="yellowcardescription">
-            <h3 id="chevroletcarheading">Chevrolet Camaro ZA100</h3>
-            <p id="chevroeltcardescription">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptate asperiores eos cum. Rerum sunt
-                tenetur repellendus id quaerat repudiandae repellat laudantium est. Dolor fuga earum, possimus fugiat
-                rerum explicabo ad illo saepe distinctio vitae doloribus voluptas soluta praesentium sequi impedit
-                commodi
-            </p>
-            <p style="margin-top: -17px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio similique
-                cupiditate quibusdam n</p>
-            <button id="chevroletcarbutton">View Deatails</button>
-        </span>
-    </div> -->
-
-    <!--Slider -->
-  
     <div class="slider-container">
         <div class="slides">
             <!-- Slide 1 -->
@@ -216,8 +226,8 @@
         <button class="arrow next" aria-label="Next slide">❯</button>
         <div class="dots"></div>
     </div>
-        
-        <!-- Slider  -->
+
+    <!-- Slider  -->
 
     <div class="containernewest">
         <div id="chekout">Checkout the latest Featured Cars</div>
@@ -240,8 +250,6 @@
                 <hr>
             </div>
         </div>
-
-
         <div class="row" id="row2">
             <div class="col-2">
                 <button id="bodyType" onclick="changeCategory(this)">Body Type</button>
@@ -253,7 +261,7 @@
                 <button id="fuelType" onclick="changeCategory(this)">Fuel type</button>
             </div>
             <div class="col-2">
-                <button id="years" onclick="changeCategory(this)">Year</button>
+                <button id="years" onclick="changeCategory(this)">Years</button>
             </div>
             <div class="col-4">
 
@@ -304,69 +312,13 @@
     <?php
     include_once("Layouts/footer.php")
     ?>
-    <!-- <class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <h3>CARVILLA</h3>
-                <P>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem, ipsam. Lorem ipsum dolor sit amet
-                    consectetur, adipisicing elit. Numquam, ut?</P>
-                <p>name@domain.com <br>+1(222)1234567890</p>
-            </div>
-            <div class="col">
-                <h3 style="font-size: 17px;">ABOUT DEVLOON</h3>
-                <ul><br><br>
-                    <li>About us</li>
-                    <li>Career</li>
-                    <li>Terms of Service</li>
-                    <li>Privacy Policy</li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3 style="font-size: 17px;">TOP BRANDS</h3>
-                <ul><br><br>
-                    <li>BMW</li>
-                    <li>Lamborghini</li>
-                    <li>Camarao</li>
-                    <li>Audi</li>
-                    <li>Infiniti</li>
-                    <li>Nissan</li>
-                </ul>
-            </div>
-            <div class="col">
-                <ul><br><br><br><br><br>
-                    <li>Ferrari</li>
-                    <li>Porsche</li>
-                    <li>Land Rover</li>
-                    <li>Astan Martin</li>
-                    <li>Mersedes</li>
-                    <li>Opei</li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3 style="font-size: 17px;">NEWS LETTER</h3>
-                <p>Subscribe to get latest news update <br>and information</p>
-                <input type="email" placeholder="Add Email">
-            </div>
-        </div>
-        <div class="row">
-            <hr>
-            <div class="col-9">
-                <p>© copyright. designed and developed by themesine.</p>
-            </div>
-            <div class="col-3">
-                <img src="img/fblogo.png" alt="fb" style="    margin-left: 158px;">
-                <img src="img/instalogo.png" alt="inst">
-                <img src="img/twtlogo.png" alt="linkden">
-                <img src="img/ytlogo.webp" alt="p">
-
-                
-            </div>
-        </div> -->
     <script>
         var btype = "";
         var carBudget = "";
         var fuelType = "";
         var years = "";
+
+
         $.ajax({
             url: "functions.php",
             type: "POST",
@@ -376,118 +328,27 @@
                 "RESULT_TYPE": "GET_CATEGORIY"
             },
             success: function(res) {
+
+                console.log(res);
                 var jobj = JSON.parse(res);
                 btype = jobj.bodyType;
                 carBudget = jobj.budget;
                 fuelType = jobj.fuelType;
                 years = jobj.years;
+
+                console.log(years);
+                console.log("resforyears");
+
                 bodyType.click();
 
             }
         });
-
-
         creteSelectBoxesOption();
-
-
-
-        /*   function filterYear(){
-               row3.innerHTML = "";
-               var filterYear = `{
-                             "filteryear":[
-                             {"year":"2024"},{"year":"2023"},{"year":"2022"},{"year":"2021"},
-                             {
-                             "year":"2020"
-                             },{"year":"2019"},{"year":"2018"},{"year":"2017"},{"year":"2016"},{"year":"2015"}
-                             ]
-                             }`
-               var eobj = JSON.parse(filterYear);
-               var eobjarr = eobj.filteryear;
-   
-   
-   
-               for (i = 0; i < eobjarr.length; i++) {
-                   var c1 = document.createElement("div");
-                   c1.classList.add("col-2")
-                   row3.appendChild(c1);
-   
-                   var h_5 = document.createElement("h5");
-                   h_5.classList.add("jsh_5")
-                   h_5.innerHTML = eobjarr[i].year;
-                   c1.appendChild(h_5);
-                   console.log(eobjarr[i].year);
-               }
-           }
-           function filterFuelType() {
-               row3.innerHTML = "";
-               var filterfueltype = `{
-                             "filterfueltype":[
-                             {
-                             "fuel":"Petrol"
-                             },
-                             {
-                             "fuel":"Diesel"
-                             },
-                             {
-                             "fuel":"Electric"
-                             }
-                             ]
-                             }`
-               var dobj = JSON.parse(filterfueltype);
-               var dobjarr = dobj.filterfueltype;
-   
-   
-   
-               for (i = 0; i < dobjarr.length; i++) {
-                   var c1 = document.createElement("div");
-                   c1.classList.add("col-2")
-                   row3.appendChild(c1);
-   
-                   var h_5 = document.createElement("h5");
-                   h_5.classList.add("jsh_5")
-                   h_5.innerHTML = dobjarr[i].fuel;
-                   c1.appendChild(h_5);
-                   console.log(dobjarr[i].fuel);
-               }
-           }
-           function filterCarBudget() {
-               row3.innerHTML = "";
-   
-               var filtercarbudget = `{
-                             "filterCarBudget":[
-                             {
-                             "range":"Below 1 Lack"
-                             },
-                             {
-                             "range":"Between 1-3 Lack"
-                             },
-                             {
-                             "range":"Between 3-7 Lack"
-                             },{"range":"Between 7-12 Lack"},{"range":"Between 12-20 Lack"},
-                             {"range":"Above 20 Lack"},{"range":"Above 20 Lack"},{"range":"Above 20 Lack"},{"range":"Above 20 Lack"}
-                             ]
-                             }`
-               var cobj = JSON.parse(filtercarbudget);
-               var cobjarr = cobj.filterCarBudget;
-   
-   
-   
-               for (i = 0; i < cobjarr.length; i++) {
-                   var b1 = document.createElement("div");
-                   b1.classList.add("col-2")
-                   row3.appendChild(b1);
-   
-                   var h_5 = document.createElement("h5");
-                   h_5.classList.add("jsh_5")
-                   h_5.innerHTML = cobjarr[i].range;
-                   b1.appendChild(h_5);
-                   console.log(cobjarr[i].range);
-               }
-           }*/
 
         function changeCategory(element, id) {
             row3.innerHTML = "";
-            console.log(element.id);
+            console.log(element.id+"hkj");
+
 
             var jobj;
             var category;
@@ -507,10 +368,12 @@
                 case "years":
                     jobj = years;
                     break;
+
             }
 
-            category = jobj.category
-            //  console.log(category);
+            category = jobj.category;
+            console.log(category);
+            console.log("category years");
 
             for (i = 0; i < category.length; i++) {
 
@@ -519,46 +382,102 @@
                 d1.id = element.id + "-" + category[i].fname;
                 d1.addEventListener("click", redirectToCarlisting2)
                 if (element.id == "bodyType") {
+                    d1.id = element.id + "-" + category[i].fname + "-" + category[i].id;
                     var img1 = document.createElement("img");
-                    img1.src = category[i].image;
+                    img1.src = "img/" + category[i].image;
                     d1.appendChild(img1);
+                }else{
+                    
                 }
                 var h_5 = document.createElement("h5");
                 h_5.innerHTML = category[i].name;
                 d1.appendChild(h_5);
 
                 row3.appendChild(d1);
-
-
             }
 
         }
-
         var MAKEMODEL = "";
 
-        function makeChange() {
-            console.log(make);
-            var modelc = MAKEMODEL[make.value];
+        function makeChange($make, $year) {
+            $.ajax({
+                url: "functions.php",
+                type: "POST",
+                data: {
+                    "RESULT_TYPE": "SELECT_MAKE_CHANGE",
+                    "YEAR": year.value,
+                    "MAKE": make.value
+                },
+                success: function(res) {
+                    console.log(res);
+                    var jobj = JSON.parse(res);
 
+                    var model = document.getElementById("model");
+                    model.innerHTML = "";
 
-            var model = document.getElementById("model");
-            model.innerHTML = "";
+                    var defaultOption = document.createElement("option");
+                    defaultOption.innerHTML = "Select Model";
+                    defaultOption.value = "0";
+                    model.appendChild(defaultOption);
+                    //model option
+                    for (var i = 0; i < jobj.length; i++) {
+                        var opt = document.createElement("option");
+                        opt.innerHTML = jobj[i];
+                        opt.value = jobj[i];
+                        model.appendChild(opt);
+                    }
+                }
+            });
 
-            var defaultOption = document.createElement("option");
-            defaultOption.innerHTML = "Select";
-            defaultOption.value = "Select";
-            model.appendChild(defaultOption);
-
-            console.log(modelc.length);
-
-            for (var i = 0; i < modelc.length; i++) {
-                var opt = document.createElement("option");
-                opt.innerHTML = modelc[i];
-                opt.value = modelc[i];
-                model.appendChild(opt);
-            }
 
         }
+
+        function modelchange() {
+            $.ajax({
+                url: "functions.php",
+                type: "POST",
+                data: {
+                    "RESULT_TYPE": "SELECT_MODEL_CHANGE",
+                    "YEAR": year.value,
+                    "MAKE": make.value,
+                    "MODEL": model.value
+                },
+                success: function(res) {
+                    var jobj = JSON.parse(res);
+                    console.log(jobj);
+                    carstyle.innerHTML = "";
+                    search
+
+                    //CarStyle
+                    var opt = document.createElement("option");
+                    opt.innerHTML = jobj[0].bodyname;
+                    opt.value = jobj[0].bodyType;
+                    carstyle.appendChild(opt);
+                    carstyle.disabled = true;
+                    //Car condition
+                    condition.innerHTML = "";
+                    var opt = document.createElement("option");
+                    opt.innerHTML = jobj[0].carcondition;
+                    opt.value = jobj[0].carid;
+                    condition.appendChild(opt);
+                    condition.disabled = true;
+
+                    //Price
+                    price.innerHTML = "";
+                    var opt = document.createElement("option");
+                    opt.innerHTML = jobj[0].discountedPrice;;
+                    opt.value = jobj[0].discountedPrice;
+                    price.appendChild(opt);
+                    price.disabled = true;
+                    var getbtn = document.querySelector(".Search");
+                    getbtn.id = jobj[0].carid;
+
+
+                }
+            });
+
+        }
+      
 
         function creteSelectBoxesOption() {
 
@@ -574,85 +493,34 @@
                     console.log(res);
                     var jobj = JSON.parse(res);
                     MAKEMODEL = jobj.model
+                    years = jobj.year;
                     //year option
-                    for (var i = 2020; i < 2025; i++) {
+                    for (var i = 0; i < years.length; i++) {
                         var opt = document.createElement("option");
-                        opt.innerHTML = i;
-                        opt.value = i;
+                        opt.innerHTML = years[i];
+                        opt.value = years[i];
                         year.appendChild(opt);
-                    }
-
-                    //Make option
-                    var makeArr = jobj.make;
-                    for (var i = 0; i < makeArr.length; i++) {
-                        var opt = document.createElement("option");
-                        opt.innerHTML = makeArr[i];
-                        opt.value = makeArr[i];
-                        make.appendChild(opt);
                     }
                 }
             });
 
-
-
-            //Style
-            var styleArr = ["Sudan", "SUV", "Hatch-Back"];
-            for (var i = 0; i < styleArr.length; i++) {
-                var opt = document.createElement("option");
-                opt.innerHTML = styleArr[i];
-                opt.value = styleArr[i];
-                carstyle.appendChild(opt);
-            }
-
-            //Car condition
-            var conditionArr = ["Good", "Better", "Best", "Average"];
-            for (var i = 0; i < conditionArr.length; i++) {
-                var opt = document.createElement("option");
-                opt.innerHTML = conditionArr[i];
-                opt.value = conditionArr[i];
-                condition.appendChild(opt);
-            }
-
-            //Price
-            var priceArr = ["Below_1_lack", "Between_1_3_lack", "Between_3_7_lack", "Between_7_12_lack", "Between_12_20_lack", "Above_20_lack", ];
-            for (var i = 0; i < priceArr.length; i++) {
-                var opt = document.createElement("option");
-                opt.innerHTML = priceArr[i];
-                opt.value = priceArr[i];
-                price.appendChild(opt);
-            }
         }
 
 
-        function getCars(cars) {
 
-
-            var jobj = JSON.parse(cars);
-            var carrsarr = jobj.cars;
-            modelc(carrsarr);
-        }
-
-        function modelc(carsArray) {
-
-            carsArray.forEach(car => {
-                console.log("Make: " + car.make);
-                console.log("Model: " + car.model);
-                console.log("Price: " + car.price);
-
-            });
-        }
 
         function redirectToCarInfo() {
             window.location.href = "info.php?carid=" + this.id
         }
 
         function modelc(carrsarr) {
-
+            // console.log(carrsarr);
+            // console.log("carrsarr");
             for (var i = 0; i < carrsarr.length; i++) {
 
                 var item = document.createElement("div");
                 var carimg = document.createElement("img");
-                carimg.src = carrsarr[i].image;
+                carimg.src = "img/" + carrsarr[i].image;
                 item.appendChild(carimg);
                 item.id = carrsarr[i].id;
                 item.addEventListener("click", redirectToCarInfo)
@@ -661,38 +529,36 @@
                 item.appendChild(carhr);
 
                 var carspan1 = document.createElement("span");
-                carspan1.innerHTML = "model: 2017";
+                carspan1.innerHTML = carrsarr[i].name;
                 item.appendChild(carspan1);
 
                 var carspan2 = document.createElement("span");
-                carspan2.innerHTML = "3100 mi";
+                carspan2.innerHTML = carrsarr[i].fuelType;
                 item.appendChild(carspan2);
 
                 var carspan3 = document.createElement("span");
-                carspan3.innerHTML = "240HP";
+                carspan3.innerHTML = carrsarr[i].owner;
                 item.appendChild(carspan3);
 
                 var carhr2 = document.createElement("hr");
                 item.appendChild(carhr2);
 
                 var carh3 = document.createElement("h3");
-                carh3.innerHTML = "infiniti z5 ";
+                carh3.innerHTML = carrsarr[i].make;
                 item.appendChild(carh3);
 
                 var carh4 = document.createElement("h4");
-                carh4.innerHTML = "$36,850";
+                carh4.innerHTML = "₹" + carrsarr[i].discountedPrice;
                 item.appendChild(carh4);
 
                 var carp = document.createElement("p");
-                carp.innerHTML = "lorem epsum dskha asdjhowehjk a";
+                carp.innerHTML = carrsarr[i].cardesc;
                 item.appendChild(carp);
 
                 item.classList.add("item");
                 modelcontainer.appendChild(item);
             }
         }
-
-        
     </script>
     <link href="CSS/slider.css" rel="stylesheet">
     <script src="js/slider.js"> </script>

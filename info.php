@@ -10,22 +10,28 @@ include_once("Layouts/header.php")
     <title>Car Info</title>
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
         .container {
-            
+
             display: grid;
             grid-template-columns: 60%;
             grid-template-rows: 80% 10%;
         }
 
+        .smi {
+            margin-left: 13px;
+        }
+
         .image img {
             position: relative;
-            top: 12px;
+            top: 58px;
             left: 17px;
-            border-radius: 4%;
-            width: 93%;
+            border-radius: 15%;
+            border: 3px solid grey;
+            width: 80%;
+            box-shadow: -5px 5px 41px 13px #9f9f9f;
         }
 
         .dsc {
@@ -112,6 +118,7 @@ include_once("Layouts/header.php")
             width: 52%;
             margin-left: 91px;
             border-radius: 10px;
+            margin-top: 12px;
 
         }
 
@@ -136,78 +143,100 @@ include_once("Layouts/header.php")
 
         }
     </style>
-
-
     <script>
         $(document).ready(function() {
-            console.log("ready!");
+
+            var qs = window.location.search;
+            var params = new URLSearchParams(qs);
+            //For Car Discription
             $.ajax({
                 url: "functions.php",
                 type: "POST",
                 data: {
-                    "userid": "admin",
-                    "pass1": "admin",
-                    "RESULT_TYPE": "GET_CAR_INFO"
+                    "RESULT_TYPE": "GET_CAR_INFO",
+                    "CARID": params.get("carid")
                 },
                 success: function(res) {
+
                     var jobj = JSON.parse(res);
+                    console.log(jobj);
+                    console.log("for car description");
                     carIntrod(jobj);
                 }
             });
+            //For Image Gallery
+            $.ajax({
+                url: "functions.php",
+                type: "POST",
+                data: {
+                    "RESULT_TYPE": "GET_CARIMAGE_GALLERY",
+                    "CARID": params.get("carid")
+                },
+                success: function(res) {
+
+                    var jobj = JSON.parse(res);
+                    console.log(jobj);
+                    console.log("imageGallery")
+
+
+                    // Image Gallery
+                    var d1 = document.getElementById('jsimage');
+                    var mainImage = document.getElementById('mainImage');
+                    mainImage.src = "img/" + jobj[0];
+
+                    // Create image thumbnails
+                    createThumbnail(jobj[0]);
+                    createThumbnail(jobj[1]);
+                    createThumbnail(jobj[2]);
+                    createThumbnail(jobj[3]);
+                }
+
+            });
         });
 
-
         function carIntrod(cobj) {
-            var cobjcigArr = cobj.carIntro;
-            console.log("Hiii", cobjcigArr);
-            
+            console.log(cobj.location);
+            console.log("Tejas");
 
-            // Image Gallery
-            var d1 = document.getElementById('jsimage');
-            var mainImage = document.getElementById('mainImage');
-            mainImage.src = cobjcigArr.mainImage;
 
-            // Create image thumbnails
-            createThumbnail(d1, cobjcigArr.i2);
-            createThumbnail(d1, cobjcigArr.i3);
-            createThumbnail(d1, cobjcigArr.i4);
-            createThumbnail(d1, cobjcigArr.i5);
-console.log(cobj.car.kmDriven);
-            // Insert car description and details dynamically
-            document.getElementById('carName').textContent = `${cobj.car.name} ${cobj.car.model}`;
-            document.getElementById('kmDriven').textContent = `${cobj.car.kmDriven} KM`;
-            document.getElementById('owner').textContent = `${cobj.car.owner}`;
-            document.getElementById('fuelT').textContent = `${cobj.car.fuelType}`;
-            document.getElementById('gear').textContent = `${cobj.car.gear}`;
-            document.getElementById('location').textContent = `${cobj.car.lct}`;
-            document.getElementById('emi').textContent = `₹${cobj.car.emi}/month`;
-            document.getElementById('discount').textContent = `${cobj.car.discount}%`;
-            document.getElementById('originalPrice').textContent = `₹${cobj.car.orgPrice}`;
-            document.getElementById('discountedPrice').textContent = `₹${cobj.car.dscPrice}`;
-            document.getElementById('otherCharges').textContent = `₹${cobj.car.otrCharges}`;
-            document.getElementById('regYear').textContent = `${cobj.car.regYear}`;
-            document.getElementById('makeYear').textContent = `${cobj.car.makeyear}`;
-            document.getElementById('regNumber').textContent = `${cobj.car.regNumber}`;
-            document.getElementById('transmission').textContent = `${cobj.car.transmission}`;
-            document.getElementById('engineCapacity').textContent = `${cobj.car.engineCapacity} CC`;
-            document.getElementById('insurance').textContent = `${cobj.car.insurance}`;
-            document.getElementById('spareKey').textContent = `${cobj.car.spareKey}`;
-            kms.innerHTML=`${cobj.car.kmDriven}`;
-            ownership.innerHTML=`${cobj.car.owner}`;
-            fuelType.innerHTML=`${cobj.car.fuelType}`
+
+            carName.innerHTML = `${cobj.name} ${cobj.model}`;
+            kmDriven.innerHTML = `${cobj.kms} KM`;
+            owner.innerHTML = `${cobj.owner}`;
+            fuelT.innerHTML = `${cobj.fuelType}`;
+            gear.innerHTML = `${cobj.transmission}`;
+            lct.innerHTML = `${cobj.location}`;
+            emi.innerHTML = `₹${cobj.emi}/month`;
+            discount.innerHTML = `44%`;
+            originalPrice.innerHTML = `₹${cobj.price}`;
+            discountedPrice.innerHTML = `₹${cobj.discountedPrice}`;
+            otherCharges.innerHTML = `₹${cobj.otherCharges}`;
+            speacialfeatures.innerHTML = `${cobj.ssf}`
+            regYear.innerHTML = `${cobj.regYear}`;
+            makeYear.innerHTML = `${cobj.makeYear}`;
+            regNumber.innerHTML = `${cobj.regNo}`;
+            transmission.innerHTML = `${cobj.transmission}`;
+            engineCapacity.innerHTML = `${cobj.engine} CC`;
+            insurance.innerHTML = `${cobj.insurance} Rs/Month`;
+            spkey.innerHTML = `${cobj.spareKey}`;
+            kms.innerHTML = `${cobj.kms} KMS`;
+            ownership.innerHTML = `${cobj.owner}`;
+            fuelType.innerHTML = `${cobj.fuelType}`;
         }
 
         // Function to create image thumbnails
-        function createThumbnail(d1, src) {
+        function createThumbnail(src) {
             var sp = document.createElement("span");
-
             var img = document.createElement("img");
-            img.src = src;
-            img.style.width = "150px"
-            img.style.height = "150px"
-            img.style.borderRadius="9%"
+            img.src = "img/" + src;
+            img.style.width = "142px"
+            img.style.height = "140px"
+            img.style.borderRadius = "18%"
+            img.style.marginTop = "40px"
+            img.style.border = "2px solid grey"
+            sp.style.marginLeft = "13px"
             img.addEventListener("click", function() {
-                document.getElementById('mainImage').src = src;
+                mainImage.src = "img/" + src;
             });
             sp.appendChild(img);
             smallimages.appendChild(sp);
@@ -236,7 +265,7 @@ console.log(cobj.car.kmDriven);
                 <li id="fuelT">-</li>
                 <li id="gear">-</li>
             </ul>
-            <div class="d"><i class="fa-solid fa-location-dot"><span id="location">-</span></i> </div>
+            <div class="d"><i class="fa-solid fa-location-dot"><span id="lct">-</span></i> </div>
             <div class="d"><i class="fa-solid fa-table-list"></i> View Inspection Report</div>
             <div class="d"><i class="fa-solid fa-eye"></i> View Service History Report</div>
             <br>
@@ -257,7 +286,7 @@ console.log(cobj.car.kmDriven);
         </div>
     </div>
 
-    <h2 style="margin-top: 88px; margin-bottom: 48px; margin-left: 102px; margin-right: 12px;">Known Your Car</h2>
+    <h2 style="margin-top: 113px; margin-left: 337px; margin-bottom: 33px;">Known Your Car</h2>
     <div class="container-fluid" id="confluid">
         <div class="row">
             <div class="col">
@@ -268,7 +297,7 @@ console.log(cobj.car.kmDriven);
             <div class="col">
                 <img src="img/top_model.webp" alt="" width="70px" height="60px">
                 <span><strong>Top Model</strong></span>
-                <p class="para">Top variant that is equipped with all features of the model</p>
+                <p class="para" id="speacialfeatures">Top variant that is equipped with all features of the model</p>
             </div>
         </div>
         <div class="row">
@@ -316,7 +345,7 @@ console.log(cobj.car.kmDriven);
             <div class="col">
                 <i class="fa-solid fa-key"></i>
                 <span>Spare key</span>
-                <p class="para"><strong id="spareKey">-</strong></p>
+                <p class="para"><strong id="spkey">-</strong></p>
             </div>
             <div class="col">
                 <i class="fa-solid fa-gauge"></i>
@@ -370,9 +399,9 @@ console.log(cobj.car.kmDriven);
                                 <b>WhatsApp</b>
 
                             </p>
-                            <button style="border-radius: 10px; color:white; background-color: orange; width: 300px; height:40px ;" onclick="showOtpBox();" id="otpbtn"><b>GET OTP</b></button><br>
+                            <button style="border-radius: 10px; color:white; background-color: orange; width: 300px; height:40px ;" onclick="showOtpBox();" id="btnOtp"><b>GET OTP</b></button><br>
 
-                            <div class=" mb-4" style="height:40px; display: none;" id="otpBox">
+                            <div class="d-none mb-4" style="height:40px;" id="otpBox">
                                 <span style="font-size: 15px;">Generate new otp After:</span>
                                 <span id="time" style="font-size: 17px; ">60</span>
                                 <input type="number" class="from-control w-50" style="border-radius: 5px;" id="userotp" value="">
@@ -395,72 +424,144 @@ console.log(cobj.car.kmDriven);
             </div>
         </div>
     </div>
+
+    <!-- success Modal -->
+    <div
+        class="modal fade"
+        id="successModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 800px; margin-left: -100px">
+                <div class="container" style= "height:55vh; justify-content:center; align-items: center;">
+
+                    <div class="row">
+                        <div class="col">
+                            <img src="img/success.gif" alt="" width="300vh" height="200vh" style="margin-top: 20px; margin-left: 20px;border-radius: 20px;">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: -81px;">
+                        <div class="col" style="margin:0px 0px; padding:0px 0px;">
+                            <h4 style="color:green; margin:0px 0px">Test Drive Booking Successfull..</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="margin:0px 0px; padding:0px 0px;">
+                            <button class="btn btn-outline-success">Proceed to Schedule An Appointment.</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
-    var backendotp="";
-    let timer;
-    let timeLeft = 60;
+    var otp = "";
+    var timer = 60;
+
+    function verifyOtp() {
+        var qs = window.location.search;
+        var params = new URLSearchParams(qs)
+        var carid = params.get("carid")
 
 
-        
-    function showOtpBox() {
         $.ajax({
-                url: "functions.php",
-                type: "POST",
-                data: {
-                    "RESULT_TYPE": "GET_OTP",
-                },
-                success: function(res) {
-                    var jobj = JSON.parse(res);
-                    backendotp=jobj.otp;
-                    console.log(jobj.otp);
-                    
+            url: "functions.php",
+            type: "POST",
+            data: {
+                "RESULT_TYPE": "VERIFY_OTP",
+                "MOBILENO": mobileno.value,
+                "OTP": userotp.value,
+                "CARID": carid
+            },
+            success: function(res) {
+                console.log(res);
+                var jobj = JSON.parse(res)
+
+                if (jobj.status == 1) {
+                    // 
+                    exampleModal.style.display = "none";
+                    successModal.style.display = "block";
+                    successModal.classList.add("show");
+                    successModal.setAttribute("aria-hidden", "false");
+                    successModal.setAttribute("aria-modal", "true");
+                    // successModal.classList.add("modal-backdrop", "fade", "show");
+                    document.body.classList.add("modal-open");
+                    document.body.style.overflow = "hidden";
+                    document.body.appendChild(successModal);
+                    // successModal.classList.add("show")
+
+
+                } else {
+                    toastr.error(jobj.message);
+
                 }
-            });
 
-        otpBox.style.display = "block";
-        changeGetOtpbtn();
-
-        function changeGetOtpbtn() {
-            otpbtn.disabled = true;
-            otpbtn.style.backgroundColor = "grey";
-
-            timer = setInterval(function() {
-                timeLeft--;
-                time.innerHTML = timeLeft;
-
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    otpbtn.disabled = false;
-                    otpbtn.innerHTML = "Resend OTP";
-                    otpbtn.style.backgroundColor = "orange";
-                    time.innerHTML = "60";
-                    timeLeft = 60;
-                    timer;
-                }
-            }, 1000);
-            
-        }
-    }
-    function verifyOtp(){
-            if(userotp.value==backendotp){
-                // verifyOtpbtn.innerHTML="Verified....!";
-                // verifyOtpbtn.style.backgroundColor="greenYellow";
-                toastr.success("Valid OTP!")
-                otpBox.style.display="none";
-                otpbtn.innerHTML="Verification successful...!";
-                otpbtn.style.backgroundColor="green";
-                
-            }else{
-                // verifyOtpbtn.innerHTML="Invalid OTP...!";
-                // verifyOtpbtn.style.backgroundColor="red";
-                toastr.error("Invalid OTP!")
             }
+        });
+
+    }
+
+
+
+    function showOtpBox() {
+
+        console.log(mobileno.value);
+
+        var regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/
+        var validMobile = regex.test(mobileno.value)
+        if (!validMobile) {
+            toastr.error("Invalid Mobile Number")
+            return;
         }
 
+        $.ajax({
+            url: "functions.php",
+            type: "POST",
+            data: {
+                "RESULT_TYPE": "GET_OTP",
+                "MOBILENO": mobileno.value
+            },
+            success: function(res) {
+                btnOtp.style.backgroundColor = "grey";
+                btnOtp.disabled = true
+                console.log(res)
+
+                var jobj = JSON.parse(res)
+                if (jobj.status == 1) {
+                    otp = jobj.otp
+                    otpBox.classList.remove("d-none")
+                    toastr.success("OTP Send success")
+
+                    btnOtp.disabled = true
+                    otpTimer = setInterval(() => {
+                        if (timer == 0) {
+                            btnOtp.disabled = false
+                            btnOtp.style.backgroundColor = "orange";
+                            timer = 60;
+                            clearInterval(otpTimer)
+                            btnOtp.innerHTML = "Resend OTP"
+                        } else {
+
+                            btnOtp.innerHTML = "Resend in " + timer + " sec"
+                            timer--;
+                        }
+                    }, 1000);
+
+                } else {
+                    toastr.error(jobj.error)
+                }
+
+            }
+        });
+
+    }
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>
